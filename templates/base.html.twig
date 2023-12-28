@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- css file-->
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
+        {% block body %}
+
+    </head>
+    <body>
+            <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand">Navbar</a>
+                    {% if app.user %}
+                     {# Si l'utilisateur est authentifié #}
+                     <a class="btn btn-outline-info" href="{{ path('membre') }}">Page membre</a>
+                     {% if is_granted('ROLE_ADMIN') %}
+                             {# Si l'utilisateur est authentifié et qu'il est admin #}
+                             <a class="btn btn-outline-warning" href="{{ path('admin') }}">Page admin</a>
+                     {% endif %}
+
+                            <div>
+                                    Bonjour {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                    {% else %}
+                            <div>
+                                    <a class="btn btn-sm btn-primary" href="{{ path('utilisateur_new') }}">S'inscrire</a>
+                                    <a class="btn btn-sm btn-success" href="{{ path('app_login') }}">Se connecter</a>
+                            </div>
+                    {% endif %}
+            </nav>
+            <div class="container">
+                    {% if message is defined %}
+                            <div class="alert alert-danger">
+                                    {{ message }}
+                            </div>
+                    {% endif %}
+                    {% endblock %}
+            </div>
+
+
+        <!--Js file-->
+        <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous')}}"></script>
+    <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')}}"></script>
+        <script src="{{asset('#')}}"></script>
+        {% block javascripts %}{% endblock %}
+        <script src="{{asset('assets/js/script.js')}}"></script>
+
+    </head>
+    <body>
+
+     
+    </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %} {% block title %}Inscription{% endblock %} {%
+    block body %}
+    <h1>Inscription</h1>
+    
+    <fieldset>
+      <legend>Inscrivez vous</legend>
+      {{ form_start(form, ["attr", ["id", "new_edit_utilisateur"]]) }}
+    
+      <div class="row">
+        <div class="col-12">
+          {{ form_label(form.username) }}
+          {{ form_widget(form.username) }}
+          {{ form_errors(form.username) }}
+        </div>
+        <div class="col-12">
+          {{ form_label(form.password) }}
+          {{ form_widget(form.password) }}
+        </div>
+    
+        <div class="col-12">
+          <label for="verifpass">Saisir une seconde fois le mot de passe</label>
+          <input type="password" id="verifpass" required>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-success">
+            {{ button_label|default('save') }}
+          </button>
+          {{ form_end(form) }}
+        </div>
+      </div>
+      <!-- /.row -->
+    </fieldset>
+    <div class="row">
+      <div class="col-12">
+        <a class="btn btn-info" href="{{ path('home') }}">Page d'accueil</a>
+      </div>
+    
+      {% endblock %}
+    
