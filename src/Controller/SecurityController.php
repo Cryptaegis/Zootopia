@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class SecurityController extends AbstractController
 {
         /**
-         * @Route("/login", name="app_login")
+         *@Route("/login", name="app_login")
          */
         public function login(AuthenticationUtils $authenticationUtils, Session $session): Response
         {
