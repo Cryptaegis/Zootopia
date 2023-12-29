@@ -20,7 +20,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: home
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -36,15 +36,17 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
-        access_control:
-                #- { path: ^/logout, roles: ROLE_USER }
+    access_control:
+       #  { path: ^/admin, roles: ROLE_ADMIN }
+       #  { path: ^/membre, roles: ROLE_USER }
+              # { path: ^/logout, roles: ROLE_USER }
 
                 # permet de rendre la route /new accessible pour les utilisateurs anonymes (non connecté)
-                #- { path: ^/utilisateur/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+                #{ path: ^/utilisateur/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
                 # bloque toutes les routes commençant par /utilisateur sauf la ligne du dessus
-                #- { path: ^/utilisateur, roles: ROLE_USER }
-                #- { path: ^/membre, roles: IS_AUTHENTICATED_FULLY }
+                #{ path: ^/utilisateur, roles: ROLE_USER }
+               #{ path: ^/membre, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
@@ -58,6 +60,13 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
-form_login:
+
+    firewalls:
+        main: app_main
+
+        form_login:
                 login_path: app_login
                 check_path: app_login
+
+
+        
